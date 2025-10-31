@@ -6,4 +6,4 @@ from .models import Question
 def index(request):
     latest_question = Question.objects.all()
     output = ', '.join(q.question_text for q in latest_question)
-    return HttpResponse(output)
+    return render(request, 'polls/index.html', {'latest_questions': latest_question})
