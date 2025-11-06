@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Poll App</title>
-</head>
-<body>
-    <h1>Available Poll Questions</h1>
-    <ul>
-        {% for question in latest_question_list  %}
-            <li>{{question.question_text}}</li>
-        {% empty %}
-            <li>No polls are available</li>
-        {% endfor %}
-    </ul>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Poll App</title>
+    </head>
+    <body>
+        <h1>Available Poll Questions</h1>
+        {% if questions %}
+        <ul>
+            {% for question in questions  %}
+            <li>
+                <a href="{% url 'detail' question.id %}">
+                    {{question.question_text}}
+                </a>    
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No polls are available</p>    
+        {% endif %}
+    </body>
 </html>
